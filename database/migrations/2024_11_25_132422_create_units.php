@@ -15,6 +15,10 @@ return new class extends Migration
             $table->uuid('unitID')->primary();
             $table->string('unitName');
             $table->integer('divID');
+            $table->foreign('divID')
+            ->references('divID')
+            ->on('Division')
+            ->onDelete('cascade');
             $table->boolean('status');
         });
     }

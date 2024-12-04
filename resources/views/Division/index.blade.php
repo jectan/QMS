@@ -30,7 +30,11 @@
                 <tr>
                     <td>{{ $Division->divID}}</td>
                     <td>{{ $Division->divName}}</td>
-                    <td>{{ $Division->status}}</td>
+                    @if($Division->status == 1)
+                        <td>Active</td>
+                    @else
+                        <td>Inactive</td>
+                    @endif
                     <td>
                         <form action="{{ route('Division.destroy', $Division->divID) }}" method="POST">
                             @csrf

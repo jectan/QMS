@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    public $table = 'User';
+    protected $primaryKey = 'userID';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +21,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'userLastname',
+        'userFirstname',
+        'unitID',
+        'username',
         'password',
+        'status',
     ];
 
     /**

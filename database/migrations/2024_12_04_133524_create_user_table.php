@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Users', function (Blueprint $table) {
-            $table->id('userID')->autoIncrement()->primary();
-            $table->string('userLastname');
-            $table->string('userFirstname');
-            $table->integer('unitID');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->boolean('status');
-            $table->rememberToken();
-        });
+        if(!Schema::hasTable('user')){
+            Schema::create('User', function (Blueprint $table) {
+                $table->id('userID')->autoIncrement()->primary();
+                $table->string('userLastname');
+                $table->string('userFirstname');
+                $table->integer('unitID');
+                $table->string('username')->unique();
+                $table->string('password');
+                $table->boolean('status');
+                $table->rememberToken();
+            });
+        }
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
