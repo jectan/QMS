@@ -28,6 +28,21 @@ class UserController extends Controller
           ->with('success', 'User Created Successfully.');
     }
     
+    public function edit($id)
+    {
+        $User = User::find($id);
+        $Unit = Unit::all();
+        return view('User.edit', compact('User'), compact('Unit'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $User = User::find($id);
+        $User->update($request->all());
+        return redirect()->route('User.index')
+            ->with('success', "User Updated Successfully!");
+    }
+    
     public function destroy($id)
     {
         $User = User::find($id);

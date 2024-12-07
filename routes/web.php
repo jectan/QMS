@@ -1,9 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+
+Route::get('/login', [SessionController::class, 'create'])->name('Session.create');
+Route::post('/login', [SessionController::class, 'store'])->name('Session.store');
 
 Route::get('/Division', DivisionController::class .'@index')->name('Division.index');
 Route::get('/Division/create', [DivisionController::class, 'create'])->name('Division.create');
@@ -26,3 +30,6 @@ Route::get('/User/{id}/edit', [UserController::class, 'edit'])->name('User.edit'
 Route::delete('/User/{id}', [UserController::class, 'destroy'])->name('User.destroy');
 Route::put('/User/{id}', [UserController::class, 'update'])->name('User.update');
 
+
+Route::get('/Auth/login', [SesssionController::class, 'create'])->name('Login.create');
+Route::post('/Auth/login', [SesssionController::class, 'store'])->name('Login.store');
