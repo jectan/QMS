@@ -5,6 +5,9 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DocTypeController;
 
 Route::get('/login', [SessionController::class, 'create'])->name('Session.create');
 Route::post('/login', [SessionController::class, 'store'])->name('Session.store');
@@ -30,6 +33,23 @@ Route::get('/User/{id}/edit', [UserController::class, 'edit'])->name('User.edit'
 Route::delete('/User/{id}', [UserController::class, 'destroy'])->name('User.destroy');
 Route::put('/User/{id}', [UserController::class, 'update'])->name('User.update');
 
+Route::get('/Role', RoleController::class .'@index')->name('Role.index');
+Route::get('/Role/create', [RoleController::class, 'create'])->name('Role.create');
+Route::post('/Role', [RoleController::class, 'store'])->name('Role.store');
+Route::get('/Role/{id}/edit', [RoleController::class, 'edit'])->name('Role.edit');
+Route::delete('/Role/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
+Route::put('/Role/{id}', [RoleController::class, 'update'])->name('Role.update');
 
-Route::get('/Auth/login', [SesssionController::class, 'create'])->name('Login.create');
-Route::post('/Auth/login', [SesssionController::class, 'store'])->name('Login.store');
+Route::get('/Document', DocumentController::class .'@index')->name('Document.index');
+Route::get('/Document/create', [DocumentController::class, 'create'])->name('Document.create');
+Route::post('/Document', [DocumentController::class, 'store'])->name('Document.store');
+Route::get('/Document/{id}/edit', [DocumentController::class, 'edit'])->name('Document.edit');
+Route::delete('/Document/{id}', [DocumentController::class, 'destroy'])->name('Document.destroy');
+Route::put('/Document/{id}', [DocumentController::class, 'update'])->name('Document.update');
+
+Route::get('/DocType', DocTypeController::class .'@index')->name('DocType.index');
+Route::get('/DocType/create', [DocTypeController::class, 'create'])->name('DocType.create');
+Route::post('/DocType', [DocTypeController::class, 'store'])->name('DocType.store');
+Route::get('/DocType/{id}/edit', [DocTypeController::class, 'edit'])->name('DocType.edit');
+Route::delete('/DocType/{id}', [DocTypeController::class, 'destroy'])->name('DocType.destroy');
+Route::put('/DocType/{id}', [DocTypeController::class, 'update'])->name('DocType.update');

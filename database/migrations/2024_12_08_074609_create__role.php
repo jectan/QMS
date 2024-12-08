@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Division', function (Blueprint $table) {
-            $table->integer('divID')->primary();
-            $table->string('divName');
+        Schema::create('Role', function (Blueprint $table) {
+            $table->id('roleID')->autoIncrement()->primary();
+            $table->string('roleDesc');
             $table->boolean('status');
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Division');
+        Schema::dropIfExists('Role');
     }
 };

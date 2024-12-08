@@ -9,13 +9,12 @@ use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
-
     public function create()
     {
         return view('Auth.login');
     }
 
-    public function store(): RedirectResponse
+    public function store()
     {
         $attributes = request()->validate([
             'username' =>['required', 'email'],

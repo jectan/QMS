@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="card mt-5">
-    <h2 class="card-header">DICT QMS</h2>
+    <h2 class="card-header"><img class="size-100" src="DICT_Logo.png" alt="DICT_Logo" style="width:200px;height:100px;" place-items: center></h2>
     <div class="card-body">
 
         <form action="{{ route('Session.store') }}" method="POST">
@@ -21,7 +21,7 @@
                     class="form-control @error('name') is-invalid @enderror" 
                     id="username" 
                     :value="old('username')" required>
-                @error('name')
+                @error('username')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>

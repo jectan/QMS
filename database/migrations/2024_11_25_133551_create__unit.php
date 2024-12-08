@@ -12,13 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Unit', function (Blueprint $table) {
-            $table->uuid('unitID')->primary();
+            $table->id('unitID')->autoIncrement()->primary();
             $table->string('unitName');
-            $table->integer('divID');
-            $table->foreign('divID')
-            ->references('divID')
-            ->on('Division')
-            ->onDelete('cascade');
+            $table->unsignedBigInteger('divID');
+            $table->foreign('divID')->references('divID')->on('Division');
             $table->boolean('status');
         });
     }

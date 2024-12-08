@@ -16,7 +16,8 @@ return new class extends Migration
                 $table->id('userID')->autoIncrement()->primary();
                 $table->string('userLastname');
                 $table->string('userFirstname');
-                $table->integer('unitID');
+                $table->unsignedBigInteger('unitID')->index();
+                $table->foreign('unitID')->references('unitID')->on('Unit');
                 $table->string('username')->unique();
                 $table->string('password');
                 $table->boolean('status');
