@@ -8,8 +8,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocTypeController;
+use App\Http\Controllers\RequestTypeController;
 
-Route::get('/login', [SessionController::class, 'create'])->name('Session.create');
+Route::get('/', [SessionController::class, 'create'])->name('Session.create');
 Route::post('/login', [SessionController::class, 'store'])->name('Session.store');
 
 Route::get('/Division', DivisionController::class .'@index')->name('Division.index');
@@ -34,11 +35,6 @@ Route::delete('/User/{id}', [UserController::class, 'destroy'])->name('User.dest
 Route::put('/User/{id}', [UserController::class, 'update'])->name('User.update');
 
 Route::get('/Role', RoleController::class .'@index')->name('Role.index');
-Route::get('/Role/create', [RoleController::class, 'create'])->name('Role.create');
-Route::post('/Role', [RoleController::class, 'store'])->name('Role.store');
-Route::get('/Role/{id}/edit', [RoleController::class, 'edit'])->name('Role.edit');
-Route::delete('/Role/{id}', [RoleController::class, 'destroy'])->name('Role.destroy');
-Route::put('/Role/{id}', [RoleController::class, 'update'])->name('Role.update');
 
 Route::get('/Document', DocumentController::class .'@index')->name('Document.index');
 Route::get('/Document/create', [DocumentController::class, 'create'])->name('Document.create');
@@ -53,3 +49,5 @@ Route::post('/DocType', [DocTypeController::class, 'store'])->name('DocType.stor
 Route::get('/DocType/{id}/edit', [DocTypeController::class, 'edit'])->name('DocType.edit');
 Route::delete('/DocType/{id}', [DocTypeController::class, 'destroy'])->name('DocType.destroy');
 Route::put('/DocType/{id}', [DocTypeController::class, 'update'])->name('DocType.update');
+
+Route::get('/RequestType', RequestTypeController::class .'@index')->name('RequestType.index');

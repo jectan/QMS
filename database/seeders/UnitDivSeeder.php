@@ -20,20 +20,22 @@ class UnitDivSeeder extends Seeder
         ]);
 
         DB::table('Unit')->insert([
-            ['unitName' => 'ILCD', 'divID' => '2', 'status' => true],
+            ['unitName' => 'Cybersecurity', 'divID' => '2', 'status' => true],
+            ['unitName' => 'Disaster Risk Reduction Management', 'divID' => '2', 'status' => true],
+            ['unitName' => 'eGovernment', 'divID' => '2', 'status' => true],
+            ['unitName' => 'Free Wi-Fi For All', 'divID' => '2', 'status' => true],
+            ['unitName' => 'Government Network', 'divID' => '2', 'status' => true],
+            ['unitName' => 'ICT Industry Development', 'divID' => '2', 'status' => true],
+            ['unitName' => 'ICT Literacy and Competency Development', 'divID' => '2', 'status' => true],
+            ['unitName' => 'Management Information System Service', 'divID' => '2', 'status' => true],
+            ['unitName' => 'National ICT Planning, Policy and Standard', 'divID' => '2', 'status' => true],
+            ['unitName' => 'Philippine National Private Key Infrastructure', 'divID' => '2', 'status' => true],
+            ['unitName' => 'Budget', 'divID' => '1', 'status' => true],
             ['unitName' => 'Finance', 'divID' => '1', 'status' => true],
+            ['unitName' => 'Human Resource', 'divID' => '1', 'status' => true],
             ['unitName' => 'Records', 'divID' => '1', 'status' => true],
+            ['unitName' => 'Supply', 'divID' => '1', 'status' => true],
             ['unitName' => 'ORD', 'divID' => '3', 'status' => true],
-            ['unitName' => 'Administrator', 'divID' => '1', 'status' => true],
         ]);
     }
 }
-/* cybersecurity
-drrm
-egov
-f4wa
-govnet
-iid
-ilcd
-nipps
-pnpki */

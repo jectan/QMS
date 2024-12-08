@@ -15,7 +15,7 @@ class UnitController extends Controller
     {
         $Units = Division::join('Unit', 'unit.divID', '=', 'Division.divID')
               		->get(['Unit.unitID', 'Unit.unitName', 'Division.divName', 'Unit.status']);
-        return view('Unit.index', compact('Units'));
+        return view('Unit.index',  ['Units'=>$Units]);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Division;
 use Illuminate\Http\Request;
+use Auth;
 
 class DivisionController extends Controller
 {
@@ -12,6 +13,9 @@ class DivisionController extends Controller
      */
     public function index()
     {
+        if(Auth::guest())
+        return redirect('/');
+
         $Divisions = Division::all();
         return view('Division.index', ['Divisions'=>$Divisions]);
     }

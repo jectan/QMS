@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('Document', function (Blueprint $table) {
             $table->id('docID')->autoIncrement()->primary();
-            $table->integer('docTypeID')->index();
+            $table->unsignedBigInteger('docTypeID')->index();
             $table->integer('docRefCode');
             $table->integer('docTitle');
             $table->date('effectiveDate');
+            $table->foreign('docTypeID')->references('docTypeID')->on('DocType');
         });
 
         DB::statement("ALTER TABLE Document ADD docFile MEDIUMBLOB");

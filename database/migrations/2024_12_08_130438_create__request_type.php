@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('DocType', function (Blueprint $table) {
-            $table->id('docTypeID')->autoIncrement()->primary();
-            $table->string('docTypeDesc');
+        Schema::create('RequestType', function (Blueprint $table) {
+            $table->id('requestTypeID')->autoIncrement()->primary();
+            $table->string('requestTypeDesc');
             $table->boolean('status');
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('DocType');
+        Schema::dropIfExists('RequestType');
     }
 };

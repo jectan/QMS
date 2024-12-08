@@ -14,10 +14,10 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         DB::table('Role')->insert([
-            ['roleDesc' => 'Administrator', 'status' => '1'],
-            ['roleDesc' => 'Quality Management Representative', 'status' => '1'],
-            ['roleDesc' => 'Document Management Team', 'status' => '1'],
-            ['roleDesc' => 'Project Staff', 'status' => '1'],
+            ['roleDesc' => 'Administrator', 'status' => true],
+            ['roleDesc' => 'Quality Management Representative', 'status' => true],
+            ['roleDesc' => 'Document Management Team', 'status' => true],
+            ['roleDesc' => 'Project Staff', 'status' => true],
         ]);
     }
 }
