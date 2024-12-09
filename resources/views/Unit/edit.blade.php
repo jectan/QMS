@@ -27,7 +27,8 @@
                     type="text" 
                     name="unitName" 
                     class="form-control @error('name') is-invalid @enderror" 
-                    value="{{ $Unit->unitName }}">
+                    value="{{ $Unit->unitName }}"
+                    required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror

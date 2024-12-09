@@ -12,8 +12,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $Roles = Role::all();
-        return view('Role.index', ['Roles'=>$Roles]);
+        $Roles = Role::query();
+        return view('Role.index', ['Roles'=>$Divisions->paginate(5)]);
     }
 
     /**

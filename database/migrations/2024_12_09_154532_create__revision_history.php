@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_revision_history', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('RevisionHistory', function (Blueprint $table) {
+            $table->id('revHistoryID')->autoIncrement()->primary();
+            $table->unsignedBigInteger('regDocID');
+            $table->integer('revNo');
+            $table->foreign('regDocID')->references('regDocID')->on('RegisteredDoc');
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_revision_history');
+        Schema::dropIfExists('RevisionHistory');
     }
 };

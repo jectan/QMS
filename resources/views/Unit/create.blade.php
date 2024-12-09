@@ -30,7 +30,8 @@
                     name="unitName" 
                     class="form-control @error('name') is-invalid @enderror" 
                     id="inputName" 
-                    placeholder="Name">
+                    placeholder="Name"
+                    required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror

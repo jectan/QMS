@@ -11,8 +11,8 @@ class UserController extends Controller
     public function index()
     {
         $Users = Unit::join('User', 'user.unitID', '=', 'Unit.unitID')
-              		->get(['User.userID', 'User.username', 'User.userLastname', 'User.userFirstname', 'Unit.unitName', 'User.status']);
-        return view('User.index', compact('Users'));
+        ->orderBy('User.userID', 'asc')->paginate(5);
+        return view('User.index',  ['Users'=>$Users]);
     }
     
     public function create()

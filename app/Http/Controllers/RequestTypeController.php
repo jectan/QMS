@@ -12,8 +12,8 @@ class RequestTypeController extends Controller
      */
     public function index()
     {
-        $RequestTypes = RequestType::all();
-        return view('RequestType.index', ['RequestTypes'=>$RequestTypes]);
+        $RequestTypes = RequestType::query();
+        return view('RequestType.index', ['RequestTypes'=>$Divisions->paginate(5)]);
     }
 
     /**

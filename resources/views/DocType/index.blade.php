@@ -49,6 +49,9 @@
             </div>
             <tbody>
             </tbody>
+                <div>    
+                    {{ $DocTypes->links() }}
+                </div>
         </table>
 
     </div>

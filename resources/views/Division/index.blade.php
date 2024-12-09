@@ -47,10 +47,10 @@
                 @endforeach
             </thead>
             </div>
-            <tbody>
-            </tbody>
         </table>
-
+            <div>    
+                {{ $Divisions->links() }}
+            </div>
     </div>
 </div>  
 

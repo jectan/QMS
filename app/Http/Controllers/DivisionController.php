@@ -16,8 +16,8 @@ class DivisionController extends Controller
         if(Auth::guest())
         return redirect('/');
 
-        $Divisions = Division::all();
-        return view('Division.index', ['Divisions'=>$Divisions]);
+        $Divisions = Division::query();
+        return view('Division.index', ['Divisions'=>$Divisions->paginate(5)]);
     }
 
     /**

@@ -12,8 +12,8 @@ class DocTypeController extends Controller
      */
     public function index()
     {
-        $DocTypes = DocType::all();
-        return view('DocType.index', ['DocTypes'=>$DocTypes]);
+        $DocTypes = DocType::query();
+        return view('DocType.index', ['DocTypes'=>$DocTypes->paginate(5)]);
     }
 
     /**

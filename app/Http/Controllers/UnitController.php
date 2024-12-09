@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Unit;
 use App\Models\Division;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class UnitController extends Controller
     public function index()
     {
         $Units = Division::join('Unit', 'unit.divID', '=', 'Division.divID')
-              		->get(['Unit.unitID', 'Unit.unitName', 'Division.divName', 'Unit.status']);
+        ->orderBy('Unit.unitID', 'asc')->paginate(5);
         return view('Unit.index',  ['Units'=>$Units]);
     }
 
@@ -32,7 +33,17 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        Unit::create($request->all());
+        $request->validate([
+            'unitName' => ['required', 'string', 'min:3', 'max:50'],
+            'divID' => ['required', 'integer'],
+            'status' => ['required', 'integer'],
+        ]);
+
+        Unit::create([
+            'unitName' => request('unitName'),
+            'divID' => request('divID'),
+            'status' => request('status'),
+        ]);
         return redirect()->route('Unit.index')
           ->with('success', 'Unit Created Successfully.');
     }

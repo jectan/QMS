@@ -13,8 +13,8 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $Documents = Document::all();
-        return view('Document.index', ['Documents'=>$Documents]);
+        $Documents = Document::query();
+        return view('Document.index', ['Documents'=>$Documents->paginate(5)]);
     }
 
     /**

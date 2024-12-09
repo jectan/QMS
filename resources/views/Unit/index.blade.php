@@ -53,9 +53,10 @@
                 @endforeach
             </thead>
             </div>
-            <tbody>
-            </tbody>
         </table>
+            <div>    
+                {{ $Units->links() }}
+            </div>
 
     </div>
 </div>  

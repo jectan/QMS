@@ -47,8 +47,9 @@
                 @endforeach
             </thead>
             </div>
-            <tbody>
-            </tbody>
+            <div>    
+                {{ $Documents->links() }}
+            </div>
         </table>
 
     </div>
