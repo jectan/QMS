@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id('regDocID')->autoIncrement()->primary();
             $table->unsignedBigInteger('requestID');
             $table->date('effectivityDate');
+            $table->string('docFile');
             $table->foreign('requestID')->references('requestID')->on('RequestDocument');
         });
-
-        DB::statement("ALTER TABLE RegisteredDoc ADD docFile MEDIUMBLOB");
     }
 
     /**

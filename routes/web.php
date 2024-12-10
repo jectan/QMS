@@ -6,7 +6,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\RequestDocumentController;
 use App\Http\Controllers\DocTypeController;
 use App\Http\Controllers\RequestTypeController;
 
@@ -36,12 +36,12 @@ Route::put('/User/{id}', [UserController::class, 'update'])->name('User.update')
 
 Route::get('/Role', RoleController::class .'@index')->name('Role.index');
 
-Route::get('/Document', DocumentController::class .'@index')->name('Document.index');
-Route::get('/Document/create', [DocumentController::class, 'create'])->name('Document.create');
-Route::post('/Document', [DocumentController::class, 'store'])->name('Document.store');
-Route::get('/Document/{id}/edit', [DocumentController::class, 'edit'])->name('Document.edit');
-Route::delete('/Document/{id}', [DocumentController::class, 'destroy'])->name('Document.destroy');
-Route::put('/Document/{id}', [DocumentController::class, 'update'])->name('Document.update');
+Route::get('/RequestDocument', RequestDocumentController::class .'@index')->name('RequestDocument.index');
+Route::get('/RequestDocument/create', [RequestDocumentController::class, 'create'])->name('RequestDocument.create');
+Route::post('/RequestDocument', [RequestDocumentController::class, 'store'])->name('RequestDocument.store');
+Route::get('/RequestDocument/{id}/edit', [RequestDocumentController::class, 'edit'])->name('RequestDocument.edit');
+Route::delete('/RequestDocument/{id}', [RequestDocumentController::class, 'destroy'])->name('RequestDocument.destroy');
+Route::put('/RequestDocument/{id}', [RequestDocumentController::class, 'update'])->name('RequestDocument.update');
 
 Route::get('/DocType', DocTypeController::class .'@index')->name('DocType.index');
 Route::get('/DocType/create', [DocTypeController::class, 'create'])->name('DocType.create');

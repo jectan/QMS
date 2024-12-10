@@ -20,14 +20,13 @@ return new class extends Migration
             $table->string('docTitle');
             $table->string('requestReason');
             $table->unsignedBigInteger('userID')->index();
+            $table->string('requestFile');
             $table->date('requestDate');
             $table->boolean('status');
             $table->foreign('requestTypeID')->references('requestTypeID')->on('RequestType');
             $table->foreign('docTypeID')->references('docTypeID')->on('DocType');
             $table->foreign('userID')->references('userID')->on('User');
         });
-
-        DB::statement("ALTER TABLE RequestDocument ADD requestFile MEDIUMBLOB");
     }
 
     /**
