@@ -6,7 +6,8 @@ use App\Models\RequestDocument;
 use App\Models\RequestType;
 use App\Models\DocType;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RequestDocumentController extends Controller
 {
@@ -15,11 +16,13 @@ class RequestDocumentController extends Controller
      */
     public function index()
     {
-        $user_ID = Auth::user()->userID;
+        if(Auth::guest())
+        return redirect('/');
+    
         $RequestDocuments = RequestDocument::join('User', 'User.userID', '=', 'RequestDocument.userID')
+        ->join('DocType', 'DocType.docTypeID', '=', 'RequestDocument.docTypeID')
         ->orderBy('RequestDocument.requestID', 'asc')->paginate(5);
-        dd($user_ID);
-        return view('RequestDocument.index',  ['RequestDocuments'=>$RequestDocuments, 'user_ID'=>$user_ID]);
+        return view('RequestDocument.index',  ['RequestDocuments'=>$RequestDocuments]);
     }
 
     /**
@@ -37,18 +40,21 @@ class RequestDocumentController extends Controller
      */
     public function store(Request $request)
     {
-       /*  $request->validate([
+        //dd($request);
+        $request->validate([
             'requestTypeID' => ['required', 'integer'],
             'docTypeID' => ['required', 'integer'],
             'docRefCode' => ['required', 'string'],
             'currentRevNo' => ['required', 'integer'],
             'docTitle' => ['required', 'string', 'max:50'],
             'requestReason' => ['required', 'string', 'min:5', 'max:50'],
-            'userID' => ['required', 'integer'],
-            'requestFile' => ['required', 'mimes:pdf', 'string'],
-            'requestDate' => ['required', 'date'],
             'status' => ['required', 'integer'],
-        ]); */
+        ]); 
+
+        $userID = Auth::id();
+        $file = $request->file('requestFile');
+        $fileName = time().'.'.$file->getClientOriginalExtension();
+        $request->requestFile->move('RequestDocuments',$fileName);
 
         RequestDocument::create([
             'requestTypeID' => $request->requestTypeID,
@@ -57,8 +63,8 @@ class RequestDocumentController extends Controller
             'currentRevNo' => $request->currentRevNo,
             'docTitle' => $request->docTitle,
             'requestReason' => $request->requestReason,
-            'userID' => $request->userID,
-            'requestFile' => $request->requestFile,
+            'userID' => $userID,
+            'requestFile' => $fileName,
             'requestTypeID' => $request->requestTypeID,
             'requestDate' => $request->requestDate,
             'status' => $request->status,
@@ -70,9 +76,10 @@ class RequestDocumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RequestDocument $requestDocument)
+    public function show($file)
     {
-        //
+        $DocumentFile = $file;
+        return view('RequestDocument.show', compact('DocumentFile'));
     }
 
     /**
@@ -80,7 +87,10 @@ class RequestDocumentController extends Controller
      */
     public function edit($id)
     {
-        dd('Edit');
+        $Request = RequestDocument::find($id);
+        $DocType = DocType::all();
+        $RequestType = RequestType::all();
+        return view('RequestDocument.edit', compact('Request','DocType', 'RequestType'));
     }
 
     /**
@@ -88,7 +98,10 @@ class RequestDocumentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd('Update');
+        $RequestDocument = RequestDocument::find($id);
+        $RequestDocument->update($request->all());
+        return redirect()->route('RequestDocument.index')
+            ->with('success', "Request Updated Successfully!");
     }
 
     /**
@@ -96,6 +109,14 @@ class RequestDocumentController extends Controller
      */
     public function destroy($id)
     {
-        dd('Delete');
+        $RequestDocument = RequestDocument::find($id);
+        $RequestDocument->delete();
+        return redirect()->route('RequestDocument.index')
+            ->with('success', "Request Deleted Successfully!");
+    }
+
+    public function download($file)
+    {
+        return response()->download(public_path('RequestDocuments/'.$file));
     }
 }

@@ -7,11 +7,13 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RequestDocumentController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\DocTypeController;
 use App\Http\Controllers\RequestTypeController;
 
 Route::get('/', [SessionController::class, 'create'])->name('Session.create');
 Route::post('/login', [SessionController::class, 'store'])->name('Session.store');
+Route::post('/logout', [SessionController::class, 'destroy'])->name('Session.destroy');
 
 Route::get('/Division', DivisionController::class .'@index')->name('Division.index');
 Route::get('/Division/create', [DivisionController::class, 'create'])->name('Division.create');
@@ -42,6 +44,16 @@ Route::post('/RequestDocument', [RequestDocumentController::class, 'store'])->na
 Route::get('/RequestDocument/{id}/edit', [RequestDocumentController::class, 'edit'])->name('RequestDocument.edit');
 Route::delete('/RequestDocument/{id}', [RequestDocumentController::class, 'destroy'])->name('RequestDocument.destroy');
 Route::put('/RequestDocument/{id}', [RequestDocumentController::class, 'update'])->name('RequestDocument.update');
+Route::get('/RequestDocument/{file}', [RequestDocumentController::class, 'show'])->name('RequestDocument.show');
+//Route::get('/RequestDocument/show/{file}', [RequestDocumentController::class, 'download'])->name('RequestDocument.download');
+
+Route::get('/ReviewDocument', ReviewController::class .'@index')->name('Review.index');
+Route::get('/ReviewDocument/{id}/create', [ReviewController::class, 'create'])->name('Review.create');
+Route::put('ReviewDocument/{id}', [ReviewController::class, 'store'])->name('Review.store');
+Route::get('/ReviewDocument/{id}/edit', [ReviewController::class, 'edit'])->name('Review.edit');
+Route::delete('/ReviewDocument/{id}', [ReviewController::class, 'destroy'])->name('Review.destroy');
+Route::put('/ReviewDocument/{id}', [ReviewController::class, 'update'])->name('Review.update');
+Route::put('ReviewDocument/{id}', [ReviewController::class, 'store'])->name('Review.stores');
 
 Route::get('/DocType', DocTypeController::class .'@index')->name('DocType.index');
 Route::get('/DocType/create', [DocTypeController::class, 'create'])->name('DocType.create');

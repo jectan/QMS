@@ -1,32 +1,37 @@
 @extends('Layouts.userlayout')
 
 @section('title')
-    <title>Request Document</title>
+    <title>Review Document</title>
 @endsection
 
 @section('header')
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Add Request Document</h1>
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Add Review Document</h1>
 @endsection
 
 @section('content')
 
 <div class="card mt-5">
     <h1 class="card-header font-bold tracking-tight text-gray-900">
-        Add Request Document
+        Add Review Document
     </h1>
     <div class="card-body">
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-primary btn-danger" href="{{ route('RequestDocument.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+            <a class="btn btn-primary btn-danger" href="{{ route('Review.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
 
-        <form action="{{ route('RequestDocument.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('Review.update', $Request->requestID) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="mb-3">
                 <label for="inputcontent" class="form-label"><strong>Request Type:</strong></label><br>
                 <select name="requestTypeID">
                     @foreach($RequestType as $row)
-                        <option value="{{ $row->requestTypeID }}">{{ $row->requestTypeDesc }}</option>
+                        @if($row->requestTypeID == $Request->requestTypeID)
+                            <option value="{{ $row->requestTypeID }}" selected>{{ $row->requestTypeDesc }}</option>
+                        @else
+                            <option value="{{ $row->requestTypeID }}">{{ $row->requestTypeDesc }}</option>
+                        @endif
                     @endforeach
                 </select>
                 @error('content')
@@ -37,7 +42,11 @@
                 <label for="inputcontent" class="form-label"><strong>Document Type:</strong></label><br>
                 <select name="docTypeID">
                     @foreach($DocType as $row)
-                        <option value="{{ $row->docTypeID }}">{{ $row->docTypeDesc }}</option>
+                        @if($row->docTypeID == $Request->docTypeID)
+                        <option value="{{ $row->docTypeID }}" selected>{{ $row->docTypeDesc }}</option>
+                        @else
+                            <option value="{{ $row->docTypeID }}">{{ $row->docTypeDesc }}</option>
+                        @endif
                     @endforeach
                 </select>
                 @error('content')
@@ -51,7 +60,7 @@
                     name="docRefCode" 
                     class="form-control @error('name') is-invalid @enderror" 
                     id="docRefCode" 
-                    placeholder="N/A"
+                    value="{{ $Request->docRefCode }}"
                     required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
@@ -65,7 +74,7 @@
                     name="currentRevNo" 
                     class="form-control @error('name') is-invalid @enderror" 
                     id="currentRevNo  " 
-                    placeholder="Current Revision Number"
+                    value="{{ $Request->currentRevNo }}"
                     required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
@@ -79,7 +88,7 @@
                     name="docTitle" 
                     class="form-control @error('name') is-invalid @enderror" 
                     id="docTitle" 
-                    placeholder="e.g. Leave Application Form"
+                    value="{{ $Request->docTitle }}"
                     required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
@@ -93,7 +102,7 @@
                     name="requestReason" 
                     class="form-control @error('name') is-invalid @enderror" 
                     id="requestReason" 
-                    placeholder="e.g. To register a new form"
+                    value="{{ $Request->requestReason }}"
                     required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
@@ -102,16 +111,7 @@
             
             <div class="mb-3">
                 <label for="inputName" class="form-label"><strong>Request File:</strong></label>
-                <input 
-                    type="file" 
-                    name="requestFile" 
-                    class="form-control @error('name') is-invalid @enderror" 
-                    id="requestFile"
-                    accept=".pdf"
-                    required>
-                @error('name')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
+                <a class="btn btn-secondary" href="{{ route('RequestDocument.show', $Request->requestFile)}}"> {{ $Request->requestFile }}</a>
             </div>
             
             <div class="mb-3">
@@ -121,6 +121,7 @@
                     name="requestDate" 
                     class="form-control @error('name') is-invalid @enderror" 
                     id="requestDate" 
+                    value="{{ $Request->requestDate }}"
                     required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
@@ -133,28 +134,14 @@
                     name="status" 
                     class="form-control @error('name') is-invalid @enderror" 
                     id="status"
-                    value="1" 
+                    value="2" 
                     required>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
-            </div>
-            
-            <div class="mb-3">
-                <input 
-                    type="hidden"
-                    name="userID" 
-                    class="form-control @error('name') is-invalid @enderror" 
-                    id="userID"
-                    value="1" 
-                    required>
-                @error('name')
-                    <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+                </div>
+            <button type="submit" class="btn btn-success "><i class="fa-solid fa-floppy-disk"></i> Save</button>
         </form>
-
     </div>
 </div>
 @endsection

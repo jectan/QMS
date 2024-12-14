@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index()
     {
+        if(Auth::guest())
+        return redirect('/');
+    
         $Users = Unit::join('User', 'user.unitID', '=', 'Unit.unitID')
         ->orderBy('User.userID', 'asc')->paginate(5);
         return view('User.index',  ['Users'=>$Users]);

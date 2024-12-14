@@ -42,7 +42,7 @@
                 @error('content')
                 @enderror
             </div>
-            <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Save</button>
         </form>
 
     </div>

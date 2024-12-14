@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DocType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DocTypeController extends Controller
 {
@@ -12,6 +13,9 @@ class DocTypeController extends Controller
      */
     public function index()
     {
+        if(Auth::guest())
+        return redirect('/');
+
         $DocTypes = DocType::query();
         return view('DocType.index', ['DocTypes'=>$DocTypes->paginate(5)]);
     }

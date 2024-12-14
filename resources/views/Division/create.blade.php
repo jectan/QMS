@@ -16,7 +16,6 @@
 
         <form action="{{ route('Division.store') }}" method="POST">
             @csrf
-
             <div class="mb-3">
                 <label for="inputName" class="form-label"><strong>Division Name:</strong></label>
                 <input 

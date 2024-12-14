@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
     {
         //bcrypt()
         DB::table('User')->insert([
-            ['userLastname' => 'Tan', 'userFirstname' => 'Jec', 'unitID' => '1', 'username' => 'jerico.tan@dict.gov.ph', 'password' => bcrypt('Jec'), 'status' => true],
-            ['userLastname' => 'Tan', 'userFirstname' => 'Jerico', 'unitID' => '1', 'username' => 'jerico.tan03@gmail.com', 'password' => bcrypt('Jec'), 'status' => true],
+            ['userLastname' => 'Tan', 'userFirstname' => 'Jec', 'unitID' => '1', 'username' => 'jerico.tan@dict.gov.ph', 'password' => bcrypt('jec'), 'status' => true],
+            ['userLastname' => 'Tan', 'userFirstname' => 'Jerico', 'unitID' => '1', 'username' => 'jerico.tan03@gmail.com', 'password' => bcrypt('jec'), 'status' => true],
         ]);
     }
 }

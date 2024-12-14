@@ -1,4 +1,4 @@
-@extends('Layouts.layout')
+@extends('Layouts.loginlayout')
 
 @section('title')
     <title>DICT R9 & BST QMS</title>

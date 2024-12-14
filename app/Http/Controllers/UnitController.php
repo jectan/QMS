@@ -6,6 +6,7 @@ use DB;
 use App\Models\Unit;
 use App\Models\Division;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UnitController extends Controller
 {
@@ -14,6 +15,9 @@ class UnitController extends Controller
      */
     public function index()
     {
+        if(Auth::guest())
+        return redirect('/');
+    
         $Units = Division::join('Unit', 'unit.divID', '=', 'Division.divID')
         ->orderBy('Unit.unitID', 'asc')->paginate(5);
         return view('Unit.index',  ['Units'=>$Units]);

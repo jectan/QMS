@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RequestType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RequestTypeController extends Controller
 {
@@ -12,6 +13,9 @@ class RequestTypeController extends Controller
      */
     public function index()
     {
+        if(Auth::guest())
+        return redirect('/');
+    
         $RequestTypes = RequestType::query();
         return view('RequestType.index', ['RequestTypes'=>$Divisions->paginate(5)]);
     }
