@@ -17,6 +17,6 @@ class Review extends Model
         'requestID',
         'reviewComment',
         'reviewDate',
-        'status',
+        'reviewStatus',
     ];
 }

@@ -21,6 +21,7 @@ class RequestDocumentController extends Controller
     
         $RequestDocuments = RequestDocument::join('User', 'User.userID', '=', 'RequestDocument.userID')
         ->join('DocType', 'DocType.docTypeID', '=', 'RequestDocument.docTypeID')
+        ->where('requestStatus', 1)
         ->orderBy('RequestDocument.requestID', 'asc')->paginate(5);
         return view('RequestDocument.index',  ['RequestDocuments'=>$RequestDocuments]);
     }
@@ -48,7 +49,7 @@ class RequestDocumentController extends Controller
             'currentRevNo' => ['required', 'integer'],
             'docTitle' => ['required', 'string', 'max:50'],
             'requestReason' => ['required', 'string', 'min:5', 'max:50'],
-            'status' => ['required', 'integer'],
+            'requestStatus' => ['required', 'integer'],
         ]); 
 
         $userID = Auth::id();
@@ -67,7 +68,7 @@ class RequestDocumentController extends Controller
             'requestFile' => $fileName,
             'requestTypeID' => $request->requestTypeID,
             'requestDate' => $request->requestDate,
-            'status' => $request->status,
+            'requestStatus' => $request->requestStatus,
         ]);
         return redirect()->route('RequestDocument.index')
           ->with('success', 'Document Request Created Successfully.');

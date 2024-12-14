@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('userID')->index();
             $table->string('requestFile');
             $table->date('requestDate');
-            $table->boolean('status');
+            $table->boolean('requestStatus');
             $table->foreign('requestTypeID')->references('requestTypeID')->on('RequestType');
             $table->foreign('docTypeID')->references('docTypeID')->on('DocType');
             $table->foreign('userID')->references('userID')->on('User');

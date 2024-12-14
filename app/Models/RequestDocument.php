@@ -23,6 +23,6 @@ class RequestDocument extends Model
         'userID',  
         'requestFile',  
         'requestDate',
-        'status',
+        'requestStatus',
     ];
 }

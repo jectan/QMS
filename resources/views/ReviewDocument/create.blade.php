@@ -20,7 +20,7 @@
             <a class="btn btn-primary btn-danger" href="{{ route('Review.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
 
-        <form action="{{ route('Review.stores', $Request->requestID) }}" method="POST">
+        <form action="{{ route('Review.store', $Request->requestID) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -142,7 +142,17 @@
             </div>
 
             <div class="mb-3">
-                <label for="inputName" class="form-label"><strong>Reasons/Details:</strong></label>
+                <label for="inputcontent" class="form-label"><strong>Action</strong></label><br>
+                <select name="reviewStatus">
+                    <option value=1>Recommend Approval</option>
+                    <option value=0>Disapproved</option>
+                </select>
+                @error('content')
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="inputName" class="form-label"><strong>Action Reasons/Details:</strong></label>
                 <textarea 
                     name="reviewComment" 
                     class="form-control @error('name') is-invalid @enderror" 
@@ -151,16 +161,6 @@
                     required></textarea>
                 @error('name')
                     <div class="form-text text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="inputcontent" class="form-label"><strong>Action</strong></label><br>
-                <select name="status">
-                    <option value=3>Recommend Approval</option>
-                    <option value=1>Disapproved</option>
-                </select>
-                @error('content')
                 @enderror
             </div>
                 <input 

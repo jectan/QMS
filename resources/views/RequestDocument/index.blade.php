@@ -34,8 +34,8 @@
                     <td>{{ $RequestDocument->docTitle}}</td>
                     <td>{{ $RequestDocument->docTypeDesc}}</td>
                     <td>{{ $RequestDocument->userFirstname}} {{ $RequestDocument->userLastname}}</td>
-                    @if($RequestDocument->status == 1)
-                        <td>Active</td>
+                    @if($RequestDocument->requestStatus == 1)
+                        <td>For Review</td>
                     @else
                         <td>Inactive</td>
                     @endif

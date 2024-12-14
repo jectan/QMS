@@ -1,7 +1,7 @@
 @extends('Layouts.userlayout')
 
 @section('title')
-    <title>Request Document</title>
+    <title>Review Document</title>
 @endsection
 
 @section('content')
@@ -35,16 +35,22 @@
                     <td>{{ $RequestDocument->requestTypeDesc}}</td>
                     <td>{{ $RequestDocument->docTypeDesc}}</td>
                     <td>{{ $RequestDocument->userFirstname}} {{ $RequestDocument->userLastname}}</td>
-                    @if($RequestDocument->status == 2)
-                        <td>For Review</td>
-                    @elseif($RequestDocument->status == 3)
+                    @if($RequestDocument->requestStatus == 2)
                         <td>For Approval</td>
+                    @else
+                        <td>For Review</td>
                     @endif
                     <td>
                         <form action="{{ route('Review.destroy', $RequestDocument->requestID) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a class="btn btn-success" href="{{ route('Review.create', $RequestDocument->requestID) }}"><i class="fas fa-edit"></i> Review</a>
+
+                            @if($RequestDocument->requestStatus == 2)
+                                <a class="btn btn-success" href="{{ route('Review.edit', $RequestDocument->requestID) }}"><i class="fas fa-edit"></i> Edit</a>
+                            @else
+                                <a class="btn btn-success" href="{{ route('Review.create', $RequestDocument->requestID) }}"><i class="fas fa-edit"></i> Review</a>
+                            @endif
+                            
                             <button class="btn btn-danger" type="SUBMIT"><i class="fas fa-trash"></i> Delete</button>
                         </form>
                     </td>

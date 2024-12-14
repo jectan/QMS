@@ -5,14 +5,14 @@
 @endsection
 
 @section('header')
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Add Review Document</h1>
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Review Document</h1>
 @endsection
 
 @section('content')
 
 <div class="card mt-5">
     <h1 class="card-header font-bold tracking-tight text-gray-900">
-        Add Review Document
+        Review Document
     </h1>
     <div class="card-body">
 
@@ -20,7 +20,7 @@
             <a class="btn btn-primary btn-danger" href="{{ route('Review.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
 
-        <form action="{{ route('Review.update', $Request->requestID) }}" method="POST">
+        <form action="{{ route('Review.update', $Review->reviewID) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -127,7 +127,35 @@
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            
+
+            <div class="mb-3">
+                <label for="inputcontent" class="form-label"><strong>Action</strong></label><br>
+                <select name="reviewStatus">
+                    @if($Review->reviewStatus == 1)
+                        <option value=1 selected>Recommend Approval</option>
+                        <option value=0>Disapproved</option>
+                    @else
+                        <option value=1>Recommend Approval</option>
+                        <option value=0 selected>Disapproved</option>
+                    @endif
+                </select>
+                @error('content')
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="inputName" class="form-label"><strong>Action Reasons/Details:</strong></label>
+                <textarea 
+                    name="reviewComment" 
+                    class="form-control @error('name') is-invalid @enderror" 
+                    id="reviewComment"
+                    rows="4" cols="50"
+                    required>{{ $Review->reviewComment }}</textarea>
+                @error('name')
+                    <div class="form-text text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="mb-3">
                 <input 
                     type="hidden"

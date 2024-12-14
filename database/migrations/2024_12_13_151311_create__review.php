@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('requestID');
             $table->string('reviewComment');
             $table->date('reviewDate');
-            $table->boolean('status');
+            $table->boolean('reviewStatus');
             $table->foreign('userID')->references('userID')->on('User');
             $table->foreign('requestID')->references('requestID')->on('RequestDocument');
         });

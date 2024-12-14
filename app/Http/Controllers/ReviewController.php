@@ -22,7 +22,10 @@ class ReviewController extends Controller
         $RequestDocuments = RequestDocument::join('RequestType', 'RequestType.requestTypeID', '=', 'RequestDocument.requestTypeID')
         ->join('User', 'User.userID', '=', 'RequestDocument.userID')
         ->join('DocType', 'DocType.docTypeID', '=', 'RequestDocument.docTypeID')
+        ->where('requestStatus', '=', 2)
+        ->orWhere('requestStatus', '=', 1)
         ->orderBy('User.userID', 'asc')->paginate(5);
+        //dd($RequestDocuments);
         return view('ReviewDocument.index',  ['RequestDocuments'=>$RequestDocuments]);
     }
 
@@ -45,7 +48,7 @@ class ReviewController extends Controller
         //dd('store');
         $RequestDocument = RequestDocument::find($id);
         $RequestDocument->update([
-            'status' => '3',
+            'requestStatus' => '2',
         ]);
         
         $this->createreview($request, $id);
@@ -56,12 +59,13 @@ class ReviewController extends Controller
     private function createreview($request, $id)
     {
         $userID = Auth::id();
+        dd($request->reviewComment);
         Review::create([
             'userID' => $userID,
             'requestID' => $request->requestID,
             'reviewComment' => $request->reviewComment,
             'reviewDate' => Now(),
-            'status' => TRUE,
+            'reviewStatus' => TRUE,
         ]);
     }
 
@@ -81,7 +85,9 @@ class ReviewController extends Controller
         $Request = RequestDocument::find($id);
         $DocType = DocType::all();
         $RequestType = RequestType::all();
-        return view('ReviewDocument.edit', compact('Request','DocType', 'RequestType'));
+        $Review = Review::where('requestID', $id)->firstOrFail();
+        //dd($Review);
+        return view('ReviewDocument.edit', compact('Request','DocType', 'RequestType', 'Review'));
     }
 
     /**
@@ -89,10 +95,9 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $RequestDocument = RequestDocument::find($id);
-        $RequestDocument->update([
-            'status' => '3',
-        ]);
+        $Review = Review::find($id);
+        //dd($Review);
+        $Review->update($request->all());
         return redirect()->route('Review.index')
             ->with('success', "Reviewed Successfully!");
     }

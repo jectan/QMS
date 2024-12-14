@@ -130,9 +130,9 @@
             <div class="mb-3">
                 <input 
                     type="hidden"
-                    name="status" 
+                    name="requestStatus" 
                     class="form-control @error('name') is-invalid @enderror" 
-                    id="status"
+                    id="requestStatus"
                     value="1" 
                     required>
                 @error('name')
