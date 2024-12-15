@@ -70,6 +70,9 @@ Route::get('/RegisterDocument/{id}/edit', [RegisteredDocController::class, 'edit
 Route::delete('/RegisterDocument/{id}', [RegisteredDocController::class, 'destroy'])->name('Register.destroy');
 Route::put('/RegisterDocument/edit/{id}', [RegisteredDocController::class, 'update'])->name('Register.update');
 
+Route::get('/Document', RegisteredDocController::class .'@index2')->name('Registered.index2');
+Route::get('/Document/{file}', [RegisteredDocController::class, 'show'])->name('Registered.show');
+
 Route::get('/DocType', DocTypeController::class .'@index')->name('DocType.index');
 Route::get('/DocType/create', [DocTypeController::class, 'create'])->name('DocType.create');
 Route::post('/DocType', [DocTypeController::class, 'store'])->name('DocType.store');

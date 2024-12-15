@@ -31,6 +31,21 @@ class RegisteredDocController extends Controller
         return view('RegisterDocument.index',  ['RequestDocuments'=>$RequestDocuments]);
     }
 
+    public function index2()
+    {
+        if(Auth::guest())
+        return redirect('/');
+    
+        $RegisteredDoc = RegisteredDoc::join('RequestDocument', 'RequestDocument.requestID', '=', 'RegisteredDoc.requestID')
+        ->join('RequestType', 'RequestType.requestTypeID', '=', 'RequestDocument.requestTypeID')
+        ->join('User', 'User.userID', '=', 'RequestDocument.userID')
+        ->join('DocType', 'DocType.docTypeID', '=', 'RequestDocument.docTypeID')
+        ->Where('requestStatus', '=', 4)
+        ->orderBy('User.userID', 'asc')->paginate(5);
+        //dd($RegisteredDoc);
+        return view('Document.index',  ['RegisteredDocs'=>$RegisteredDoc]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -76,9 +91,10 @@ class RegisteredDocController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RegisteredDoc $registeredDoc)
+    public function show($file)
     {
-        //
+        $DocumentFile = $file;
+        return view('Document.show', compact('DocumentFile'));
     }
 
     /**
