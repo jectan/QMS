@@ -59,7 +59,7 @@ class ReviewController extends Controller
     private function createreview($request, $id)
     {
         $userID = Auth::id();
-        dd($request->reviewComment);
+        //dd($request->reviewComment);
         Review::create([
             'userID' => $userID,
             'requestID' => $request->requestID,

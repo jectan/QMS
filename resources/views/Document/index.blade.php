@@ -22,7 +22,7 @@
                 <tr>
                     <th width="80px">No</th>
                     <th>Document Name</th>
-                    <th>Request Type</th>
+                    <th>Doc Ref Code</th>
                     <th>Document Type</th>
                     <th>Requested By</th>
                     <th>Status</th>
@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $RegisteredDoc->regDocID}}</td>
                     <td>{{ $RegisteredDoc->docTitle}}</td>
-                    <td>{{ $RegisteredDoc->requestTypeDesc}}</td>
+                    <td>{{ $RegisteredDoc->docRefCode}}</td>
                     <td>{{ $RegisteredDoc->docTypeDesc}}</td>
                     <td>{{ $RegisteredDoc->userFirstname}} {{ $RegisteredDoc->userLastname}}</td>
                     @if($RegisteredDoc->requestStatus == 3)
